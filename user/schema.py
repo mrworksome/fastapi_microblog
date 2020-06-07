@@ -1,11 +1,12 @@
-from datetime import datetime
+from typing import Optional
+from uuid import UUID
 
 from fastapi_users import models
+from pydantic import BaseModel
 
 
 class User(models.BaseUser):
     name: str
-    date: datetime
 
     class Config:
         orm_mode = True
@@ -21,3 +22,9 @@ class UserUpdate(User, models.BaseUserUpdate):
 
 class UserDB(User, models.BaseUserDB):
     pass
+
+
+class UserInResponse(BaseModel):
+    id: UUID
+    name: Optional[str]
+    email: str

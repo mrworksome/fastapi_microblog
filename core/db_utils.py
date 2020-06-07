@@ -13,4 +13,3 @@ async def shutdown_db_client():
     logging.info("Disconnection DB...")
     await database.disconnect()
     logging.info("Disconnected.")
-

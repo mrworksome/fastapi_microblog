@@ -3,7 +3,7 @@ from typing import Optional, List
 
 from pydantic.main import BaseModel
 
-from user.schema import User
+from user.schema import UserInResponse
 
 
 class PostBase(BaseModel):
@@ -12,14 +12,8 @@ class PostBase(BaseModel):
     date: datetime
 
 
-class PostList(PostBase):
-    id: int
-    parent_id: Optional[int] = None
-
-
-class PostSingle(PostList):
-    children: Optional[List[PostBase]] = None
-    user: Optional[User] = None
+class PostUpdate(PostBase):
+    pass
 
 
 class PostCreate(PostBase):
@@ -27,3 +21,17 @@ class PostCreate(PostBase):
 
     class Config:
         orm_mode = True
+
+
+class PostInDB(PostCreate):
+    post_id: Optional[int]
+    user: Optional[UserInResponse]
+
+
+class PostCommentList(PostInDB):
+    children: Optional[List[PostBase]] = []
+
+
+class PostSingle(PostBase):
+    post_id: Optional[int]
+    user_id: str
