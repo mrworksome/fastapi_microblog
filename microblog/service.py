@@ -54,6 +54,7 @@ async def update_post(pk: int, item: PostUpdate, user: User) -> PostInDB:
 
 async def delete_post(pk: int, user: User) -> None:
     """ Delete post cascade if post have a children post """
-    post = posts.delete().where((posts.c.post_id == pk) & (posts.c.user_id == str(user.id)))
+    post = posts.delete().where(and_(
+        posts.c.post_id == pk, posts.c.user_id == str(user.id)))
 
     return await database.execute(post)
