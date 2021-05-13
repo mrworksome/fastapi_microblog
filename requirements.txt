@@ -6,7 +6,7 @@ httptools==0.1.1
 Mako==1.1.2
 MarkupSafe==1.1.1
 psycopg2-binary==2.8.5
-pydantic==1.5.1
+pydantic==1.6.2
 python-dateutil==2.8.1
 python-editor==1.0.4
 six==1.14.0
